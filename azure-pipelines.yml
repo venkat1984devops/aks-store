@@ -20,8 +20,7 @@ stages:
       - job: build
         displayName: build and push docker image
         steps:
-          - script: "docker image build -t shaikkhajaibrahim/store-front:$(Build.BuildNumber)"
-            workingDirectory: src/store-front
+          - script: "docker image build -t shaikkhajaibrahim/store-front:$(Build.BuildNumber) ./src/store-front"
           - script: "docker image push shaikkhajaibrahim/store-front:$(Build.BuildNumber)"
           
 
