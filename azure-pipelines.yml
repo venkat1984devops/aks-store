@@ -9,11 +9,19 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+  - stage: build
+    displayName: Docker Build
+    pool:
+     name: default
+     demands:
+       - Agent.name -equals docker
+    jobs:
+      - job: build
+        displayName: build and push docker image
+        steps:
+          - script: "docker image build -t shaikkhajaibrahim/store-front:$(Build.BuildNumber)"
+            workingDirectory: src/store-front
+          - script: "docker image push shaikkhajaibrahim/store-front:$(Build.BuildNumber)"
+          
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
