@@ -34,17 +34,17 @@ stages:
       - job: devdeployment
         displayName: deploy into dev environment
         steps:
-          - script: helm upgrade --install aks-store --namespace dev --create-namespace --set "storefront.image.tag=$(Build.BuildNumber)" ./charts/aks-store-demo
+          - script: helm upgrade --install aks-store --namespace dev --create-namespace --set "storeFront.image.tag=$(Build.BuildNumber)" ./charts/aks-store-demo
             displayName: "deploy into dev"
       - job: qadeployment
         displayName: deploy into qa environment
         steps:
-          - script: helm upgrade --install aks-store --namespace qa --create-namespace --set "storefront.image.tag=$(Build.BuildNumber)" ./charts/aks-store-demo
+          - script: helm upgrade --install aks-store --namespace qa --create-namespace --set "storeFront.image.tag=$(Build.BuildNumber)" ./charts/aks-store-demo
             displayName: "deploy into qa"
       - job: stagindeployment
         displayName: deploy into staging environment
         steps:
-          - script: helm upgrade --install aks-store --namespace staging --create-namespace --set "storefront.image.tag=$(Build.BuildNumber)" ./charts/aks-store-demo
+          - script: helm upgrade --install aks-store --namespace staging --create-namespace --set "storeFront.image.tag=$(Build.BuildNumber)" ./charts/aks-store-demo
             displayName: "deploy into staging"
           
 
