@@ -69,8 +69,8 @@ storeAdmin:
 
 storeFront:
   image:
-    repository: "ghcr.io/azure-samples/aks-store-demo/store-front"
-    tag: "latest"
+    repository: "shaikkhajaibrahim/store-front"
+    tag: "test"
   serviceType: LoadBalancer
 
 virtualCustomer:
