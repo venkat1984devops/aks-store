@@ -21,6 +21,30 @@ stages:
         displayName: build and push docker image
         steps:
           - script: "docker image build -t shaikkhajaibrahim/store-front:$(Build.BuildNumber) ./src/store-front"
+            displayName: "building image"
           - script: "docker image push shaikkhajaibrahim/store-front:$(Build.BuildNumber)"
+            displayName: "pushing image"
+  - stage: deploy
+    displayName: kubernetes Deploy
+    pool:
+     name: default
+     demands:
+       - Agent.name -equals kubectl
+    jobs:
+      - job: devdeployment
+        displayName: deploy into dev environment
+        steps:
+          - script: helm upgrade --install aks-store --namespace dev --create-namespace --set "storefront.image.tag=$(Build.BuildNumber)" ./charts/aks-store-demo
+            displayName: "deploy into dev"
+      - job: qadeployment
+        displayName: deploy into qa environment
+        steps:
+          - script: helm upgrade --install aks-store --namespace qa --create-namespace --set "storefront.image.tag=$(Build.BuildNumber)" ./charts/aks-store-demo
+            displayName: "deploy into qa"
+      - job: stagindeployment
+        displayName: deploy into staging environment
+        steps:
+          - script: helm upgrade --install aks-store --namespace staging --create-namespace --set "storefront.image.tag=$(Build.BuildNumber)" ./charts/aks-store-demo
+            displayName: "deploy into staging"
           
 
