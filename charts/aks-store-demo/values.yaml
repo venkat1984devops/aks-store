@@ -70,7 +70,7 @@ storeAdmin:
 storeFront:
   image:
     repository: "shaikkhajaibrahim/store-front"
-    tag: "test"
+    tag: "20250329.8"
   serviceType: LoadBalancer
 
 virtualCustomer:
