@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aks-store
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+  project: default
+  source:
+    repoURL: https://github.com/KhajaWorkshopsAtQT/aks-store-demo-march-25.git
+    targetRevision: main
+    path: charts/aks-store-demo
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
