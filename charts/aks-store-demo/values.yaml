@@ -71,7 +71,7 @@ storeFront:
   image:
     repository: "shaikkhajaibrahim/store-front"
     tag: "20250329.8"
-  #serviceType: LoadBalancer
+  serviceType: NodePort
 
 virtualCustomer:
   image:
